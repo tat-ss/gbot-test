@@ -7,22 +7,24 @@ class App extends Component {
       logs: [],
     };
 
-    this.handleTimer = this.handleTimer.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
 
-  handleTimer() {
-    const logs = [...this.state.logs, `Count ${this.state.logs.length + 1}`];
+  handleData(json) {
+    const logs = [...this.state.logs, json.message];
     this.setState({ logs });
   }
 
   componentDidMount() {
-    window.setInterval(this.handleTimer, 1000);
+    fetch('./data.json')
+      .then(res => res.json())
+      .then(this.handleData);
   }
 
   render() {
     return (
       <div className="App">
-        Start
+        Start {this.props.title}
         {
           this.state.logs.map(log => (
             <div>{log}</div>

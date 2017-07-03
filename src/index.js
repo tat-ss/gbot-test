@@ -6,3 +6,7 @@ import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
+
+document.getElementById('rerender').addEventListener('click', () => {
+  ReactDOM.render(<App title="Rerender" />, document.getElementById('root'));
+});
