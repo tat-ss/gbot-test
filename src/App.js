@@ -11,12 +11,16 @@ class App extends Component {
   }
 
   handleData(json) {
-    const logs = [...this.state.logs, json.message];
+    const logs = [
+      ...this.state.logs,
+      json.total_population[0].population,
+      json.total_population[1].population,
+    ];
     this.setState({ logs });
   }
 
   componentDidMount() {
-    fetch('./data.json')
+    fetch('http://api.population.io/1.0/population/World/today-and-tomorrow/')
       .then(res => res.json())
       .then(this.handleData);
   }
